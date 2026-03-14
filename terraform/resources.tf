@@ -1,1 +1,32 @@
-# No resources - S3 buckets removed
+resource "aws_s3_bucket" "msp_bucket" {
+  bucket = "msp-storage-${var.environment}"
+
+  tags = {
+    Name = "msp-storage-${var.environment}"
+  }
+}
+
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["al2023-ami-*-x86_64"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
+resource "aws_instance" "msp01" {
+  ami           = data.aws_ami.amazon_linux.id
+  instance_type = "t3.micro"
+  key_name      = var.key_name
+
+  tags = {
+    Name = "msp01"
+  }
+}
