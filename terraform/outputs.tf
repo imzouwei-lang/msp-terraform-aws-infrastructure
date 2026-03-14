@@ -17,3 +17,13 @@ output "msp_03_public_ip" {
   description = "MSP-03 公网 IP"
   value       = aws_instance.msp_03.public_ip
 }
+
+output "msp_04_instance_id" {
+  description = "MSP-04 实例 ID"
+  value       = aws_instance.msp_04.id
+}
+
+output "msp_04_public_ip" {
+  description = "MSP-04 公网 IP"
+  value       = aws_instance.msp_04.public_ip
+}
