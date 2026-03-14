@@ -1,9 +1,9 @@
-output "msp01_instance_id" {
-  description = "msp01 实例 ID"
-  value       = aws_instance.msp01.id
+output "s3_bucket_name" {
+  description = "S3 bucket name"
+  value       = aws_s3_bucket.msp_bucket.id
 }
 
-output "msp01_public_ip" {
-  description = "msp01 公网 IP"
-  value       = aws_instance.msp01.public_ip
+output "s3_bucket_arn" {
+  description = "S3 bucket ARN"
+  value       = aws_s3_bucket.msp_bucket.arn
 }
