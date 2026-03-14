@@ -97,3 +97,4 @@ resource "aws_instance" "msp_02" {
     Name = "msp-02"
   }
 }
+
