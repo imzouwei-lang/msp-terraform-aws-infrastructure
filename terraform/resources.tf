@@ -154,3 +154,31 @@ resource "aws_instance" "msp_04" {
     Name = "msp-04"
   }
 }
+
+# MSP-05 服务器
+resource "aws_instance" "msp_05" {
+  ami                    = data.aws_ami.amazon_linux.id
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  vpc_security_group_ids = [aws_security_group.msp_sg.id]
+
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp3"
+  }
+
+  user_data = <<-EOF
+    #!/bin/bash
+    yum update -y
+    yum install -y docker
+    systemctl start docker
+    systemctl enable docker
+    usermod -aG docker ec2-user
+    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+  EOF
+
+  tags = {
+    Name = "msp-05"
+  }
+}
