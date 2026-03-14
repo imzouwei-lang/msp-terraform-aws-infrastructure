@@ -1,24 +1,15 @@
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners      = ["amazon"]
+resource "aws_s3_bucket" "msp_bucket_1" {
+  bucket = "msp-storage-1-${var.environment}"
 
-  filter {
-    name   = "name"
-    values = ["al2023-ami-*-x86_64"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+  tags = {
+    Name = "msp-storage-1-${var.environment}"
   }
 }
 
-resource "aws_instance" "msp01" {
-  ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t3.micro"
-  key_name      = var.key_name
+resource "aws_s3_bucket" "msp_bucket_2" {
+  bucket = "msp-storage-2-${var.environment}"
 
   tags = {
-    Name = "msp01"
+    Name = "msp-storage-2-${var.environment}"
   }
 }
