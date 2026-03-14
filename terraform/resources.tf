@@ -94,7 +94,7 @@ resource "aws_instance" "msp_02" {
   EOF
 
   tags = {
-    Name = "msp-02"
+    Name      = "msp-02"
     Recreated = "true"
   }
 }
