@@ -71,8 +71,8 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
-# 监控服务器 - Grafana + Prometheus
-resource "aws_instance" "monitoring" {
+# MSP-02 服务器
+resource "aws_instance" "msp_02" {
   ami                    = data.aws_ami.amazon_linux.id
   instance_type          = var.instance_type
   key_name               = var.key_name
@@ -95,38 +95,6 @@ resource "aws_instance" "monitoring" {
   EOF
 
   tags = {
-    Name = "监控仪表盘"
-    Role = "monitoring"
+    Name = "msp-02"
   }
 }
-
-# Wiki 知识库服务器
-resource "aws_instance" "wiki" {
-  ami                    = data.aws_ami.amazon_linux.id
-  instance_type          = var.instance_type
-  key_name               = var.key_name
-  vpc_security_group_ids = [aws_security_group.msp_sg.id]
-
-  root_block_device {
-    volume_size = 30
-    volume_type = "gp3"
-  }
-
-  user_data = <<-EOF
-    #!/bin/bash
-    yum update -y
-    yum install -y docker
-    systemctl start docker
-    systemctl enable docker
-    usermod -aG docker ec2-user
-    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
-  EOF
-
-  tags = {
-    Name = "Wiki知识库"
-    Role = "wiki"
-  }
-}
-
-# Deploy trigger: 1773475413
