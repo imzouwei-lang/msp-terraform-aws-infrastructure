@@ -1,4 +1,4 @@
-# Security Group - 允许 SSH, HTTP, HTTPS, Grafana
+# Security Group
 resource "aws_security_group" "msp_sg" {
   name        = "msp-server-sg"
   description = "Security group for MSP servers"
@@ -55,7 +55,6 @@ resource "aws_security_group" "msp_sg" {
   }
 }
 
-# 获取最新 Amazon Linux 2023 AMI
 data "aws_ami" "amazon_linux" {
   most_recent = true
   owners      = ["amazon"]
@@ -96,21 +95,5 @@ resource "aws_instance" "msp_02" {
 
   tags = {
     Name = "msp-02"
-  }
-}
-
-# S3 存储桶
-resource "aws_s3_bucket" "msp_storage" {
-  bucket = "msp-storage-288761743095"
-
-  tags = {
-    Name = "msp-storage"
-  }
-}
-
-resource "aws_s3_bucket_versioning" "msp_storage" {
-  bucket = aws_s3_bucket.msp_storage.id
-  versioning_configuration {
-    status = "Enabled"
   }
 }
