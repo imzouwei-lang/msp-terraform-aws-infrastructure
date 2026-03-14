@@ -100,3 +100,4 @@ resource "aws_instance" "msp_02" {
 }
 # Trigger deploy
 # Redeploy trigger
+# Deploy msp-02 instance
