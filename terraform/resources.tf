@@ -128,3 +128,5 @@ resource "aws_instance" "wiki" {
     Role = "wiki"
   }
 }
+
+# Deploy trigger: 1773475413
