@@ -95,6 +95,7 @@ resource "aws_instance" "msp_02" {
 
   tags = {
     Name = "msp-02"
+    Recreated = "true"
   }
 }
 
