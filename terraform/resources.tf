@@ -1,3 +1,4 @@
+# Create S3 storage buckets
 resource "aws_s3_bucket" "msp_bucket_1" {
   bucket = "msp-storage-1-${var.environment}"
 
