@@ -1,19 +1,9 @@
-output "s3_bucket_name" {
-  description = "S3 bucket name"
-  value       = aws_s3_bucket.msp_bucket.id
+output "s3_bucket_1_name" {
+  description = "S3 存储桶 1 名称"
+  value       = aws_s3_bucket.msp_bucket_1.id
 }
 
-output "s3_bucket_arn" {
-  description = "S3 bucket ARN"
-  value       = aws_s3_bucket.msp_bucket.arn
-}
-
-output "msp01_instance_id" {
-  description = "MSP01 instance ID"
-  value       = aws_instance.msp01.id
-}
-
-output "msp01_public_ip" {
-  description = "MSP01 public IP"
-  value       = aws_instance.msp01.public_ip
+output "s3_bucket_2_name" {
+  description = "S3 存储桶 2 名称"
+  value       = aws_s3_bucket.msp_bucket_2.id
 }
